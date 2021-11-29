@@ -10,8 +10,10 @@ struct TItem{
 };
 
 TItem lista[N];
+int IL, FL;
 
 void criar(){
+  IL = FL = -1;
   for (int i = 0; i < N; i++){
     lista[i].chave = -1;
   }
@@ -21,35 +23,33 @@ void carregar(){
   for (int i = 0; i < 3; i++){
     lista[i].chave = i+1;
   }
+  IL = 0;
+  FL = 2;
 }
 
 void inserir(int x){
-  int i = 0;
-  while (lista[i].chave != -1 && i < N) i++;
+  int i = IL;
+  while (lista[i].chave != -1 && i <= FL) i++;
   if (i < N) {
     lista[i].chave = x;
-    //FL++;
+    FL++;
   }
-  else printf("A lista esta cheia!");
+  else printf("O arranjo esta cheia!");
 }
 
 void inserir_inicio(int x){
-  //Falta retirar a declaração de IL e FL
-  int IL = 0;
-  int FL = 2;
-
   if(IL + FL < N - 1) {
     for (int i = FL; i >= IL; i--)
       lista[i + 1] = lista[i];
     lista[IL].chave = x;
     FL++;
   }
-  else printf("A lista esta cheia!");
+  else printf("O arrnajo esta cheio!");
 }
 
 void listar(){
   printf("----- Lista -----\n");
-  for (int i = 0; i < N && lista[i].chave != -1; i++)
+  for (int i = IL; i <= FL && lista[i].chave != -1; i++)
     printf("lista[%5d] = %5d\n", i + 1, lista[i].chave);
   printf("-----------------\n");
 }
